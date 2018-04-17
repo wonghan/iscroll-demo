@@ -1,6 +1,6 @@
 let ul = document.getElementById('ul');  // 获取ul列表
 let div = document.getElementById('article') // 获取包裹ul列表的div(css:  overflow:scroll;)
-let text = document.getElementById('text');
+let upText = document.getElementById('upText');
 let start;  // 辅助变量：触摸开始时，相对于文档顶部的Y坐标
 let num = 11; // 添加li文本，可自定义
 let refresh = false;
@@ -16,14 +16,27 @@ function addLi() {  // 添加li的方法，可自定义
     li.innerHTML = num++;
     fragment.appendChild(li); // 用DocumentFragment提高渲染速度
   }
-  ul.appendChild(fragment);
+  ul.insertBefore(fragment,downText);
 }
-div.addEventListener('scroll',function(){
-  if(div.scrollHeight-div.scrollTop<1000) {
-    addLi();
+div.addEventListener('touchmove',function(){
+  if(div.scrollHeight-div.scrollTop<=667) {
+    let touch = event.touches[0];
+    ul.style.top = ul.offsetTop + (touch.pageY - start)/5 +'px'; // ul.style.top = ul.offsetTop + 'px'
+    start = touch.pageY;
   }
 },false);
+div.addEventListener('touchend',function(event){
+  if(ul.offsetTop<0){
+    let time2 = setInterval(function(){
+      ul.style.top = ul.offsetTop +2 +'px';
+      if(ul.offsetTop>=0){
+        clearInterval(time2);
+        addLi();  
+      }
+    })
+  }
 
+},false);
 /**
  * 下拉刷新
  */
@@ -40,7 +53,7 @@ div.addEventListener('touchmove',function(event){
     start = touch.pageY;
     // 若ul偏移量过大,则修改文字,refresh置为true,配合'touchend'刷新
     if(ul.offsetTop>=100) {
-      text.innerHTML = "释放刷新";
+      upText.innerHTML = "释放刷新";
       refresh = true;
     }
   }
@@ -54,9 +67,10 @@ div.addEventListener('touchend',function(event){
       // 若ul的偏移量恢复，clearInterval
       if(ul.offsetTop<=0){
         clearInterval(time);
-        text.innerHTML = "下拉刷新";
+        upText.innerHTML = "下拉刷新";
         // 若恢复时'refresh===true',刷新页面
         if(refresh){
+          refresh = false;
           location.reload();
         }
       }
