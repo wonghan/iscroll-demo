@@ -1,0 +1,46 @@
+html,body,ul,li,div,input{
+  padding: 0;
+  margin: 0;
+}
+#header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  padding-bottom: 10px;
+  background: #fff;
+}
+#input{
+  display: inline-block;
+  width: 80%;
+  height: 30px;
+}
+#submit {
+  display: inline-block;
+  width: 16%;
+  height: 30px;
+}
+#article {
+  position: relative;
+  height: 100vh;
+  overflow:scroll;
+}
+#ul {
+  position: relative;
+  list-style: none;
+  width: 100%;
+  top: 0px;
+}
+#text {
+  border: none;
+  line-height: 0;
+  height: 30px;
+}
+.li{
+  display: flex;
+  justify-content: center;
+  line-height: 80px;
+  height:80px;
+  border-bottom: 1px solid #999;
+}
