@@ -1,7 +1,6 @@
-# iscroll-demo
-## 使用原生js，实现**移动端**的**上拉加载、下拉刷新**
+# iscroll-demo (使用原生js，实现**移动端**的**上拉加载、下拉刷新**)
 
-[演示地址](https://wonghan.github.io/iscroll-demo/)
+- [演示地址](https://wonghan.github.io/iscroll-demo/)
 
 ### HTML结构
 ```
