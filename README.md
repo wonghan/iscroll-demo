@@ -48,9 +48,9 @@ function addLi() {
 }
 
 // 上拉加载
-div.addEventListener('touchmove',function(event){
-  if(div.scrollHeight-div.scrollTop<1000) {   // 主要核心！！！
-    addLi();
+div.addEventListener('scroll',function(){
+  if(div.scrollHeight-div.scrollTop<1000) {
+    addLi();
   }
 },false);
 ```

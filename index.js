@@ -4,6 +4,10 @@ let text = document.getElementById('text');
 let start;  // 辅助变量：触摸开始时，相对于文档顶部的Y坐标
 let num = 11; // 添加li文本，可自定义
 let refresh = false;
+
+/**
+ * 上拉加载
+ */
 function addLi() {  // 添加li的方法，可自定义
   let fragment = document.createDocumentFragment();
   for(let i=0;i<10;i++) {
@@ -14,6 +18,15 @@ function addLi() {  // 添加li的方法，可自定义
   }
   ul.appendChild(fragment);
 }
+div.addEventListener('scroll',function(){
+  if(div.scrollHeight-div.scrollTop<1000) {
+    addLi();
+  }
+},false);
+
+/**
+ * 下拉刷新
+ */
 div.addEventListener('touchstart',function(event){
   let touch = event.touches[0];
   start = touch.pageY;  // 辅助变量：触摸开始时，相对于文档顶部的Y坐标
@@ -30,11 +43,6 @@ div.addEventListener('touchmove',function(event){
       text.innerHTML = "释放刷新";
       refresh = true;
     }
-  }
-
-  // 上拉加载
-  if(div.scrollHeight-div.scrollTop<1000) {
-    addLi();
   }
 },false);
 
@@ -55,6 +63,7 @@ div.addEventListener('touchend',function(event){
     })
   }
 },false);
+
 
 /** 
  *  调试用
