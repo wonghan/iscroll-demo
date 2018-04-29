@@ -4,6 +4,7 @@ let text = document.getElementById('text');
 let start;  // 辅助变量：触摸开始时，相对于文档顶部的Y坐标
 let num = 11; // 添加li文本，可自定义
 let refresh = false;
+let isLoad = false;
 
 /**
  * 上拉加载
@@ -19,8 +20,12 @@ function addLi() {  // 添加li的方法，可自定义
   ul.appendChild(fragment);
 }
 div.addEventListener('scroll',function(){
-  if(div.scrollHeight-div.scrollTop<1000) {
+  if(div.scrollHeight-div.scrollTop<1000 && isLoad===false) {
+    isLoad = true;
     addLi();
+    setTimeout(function(){
+      isLoad = false;
+    },300)  //  节流阀
   }
 },false);
 
