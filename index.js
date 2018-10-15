@@ -25,7 +25,7 @@ div.addEventListener('scroll',function(){
     addLi();
     setTimeout(function(){
       isLoad = false;
-    },300)  //  节流阀
+    },50)  //  节流阀
   }
 },false);
 
